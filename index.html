@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTG Deck Spotlight: Jörmungandr, Dawn of Ragnarok</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle theme">
+            <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <div class="mana-symbols">
+                <span class="mana-symbol">🔵</span>
+                <span class="mana-symbol">🟢</span>
+            </div>
+            <h1 class="deck-title">Jörmungandr, Dawn of Ragnarok</h1>
+            <div class="format-badge">Commander</div>
+            <p class="deck-strategy">
+                This Simic deck creates an unstoppable army of serpent tokens with Koma, Cosmos Serpent at the helm.
+                Generate tokens every upkeep, protect your board, and overwhelm opponents with a sea of serpents.
+            </p>
+            <div class="commander-info">
+                <span class="commander-label">Commander:</span> Koma, Cosmos Serpent
+            </div>
+            <div>
+                <p>
+                    View the full decklist
+                    <a href="https://archidekt.com/decks/13414144/koma_copy_cards_edh" target="_blank" rel="noopener noreferrer">here</a>
+                    on Archidekt
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls Section -->
+    <div class="container">
+        <div class="controls-section">
+            <div class="filter-controls">
+                <div class="control-group">
+                    <svg class="control-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46 22,3"></polygon>
+                    </svg>
+                    <select id="typeFilter" class="control-select">
+                        <option value="all">All Types</option>
+                        <option value="creature">Creatures</option>
+                        <option value="sorcery">Sorceries</option>
+                        <option value="instant">Instants</option>
+                        <option value="enchantment">Enchantments</option>
+                        <option value="artifact">Artifacts</option>
+                        <option value="land">Lands</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <svg class="control-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                    <select id="sortBy" class="control-select">
+                        <option value="name">Name</option>
+                        <option value="mana">Mana Cost</option>
+                        <option value="type">Type</option>
+                    </select>
+                </div>
+
+                <button id="sortDirBtn" title="Toggle sort order">⇅</button>
+            </div>
+
+            <button id="drawHandBtn" class="draw-hand-btn">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="16,3 21,3 21,8"></polyline>
+                    <line x1="4" y1="20" x2="21" y2="3"></line>
+                    <polyline points="21,16 21,21 16,21"></polyline>
+                    <line x1="15" y1="15" x2="21" y2="21"></line>
+                    <line x1="4" y1="4" x2="9" y2="9"></line>
+                </svg>
+                Draw Sample Hand
+            </button>
+        </div>
+
+        <!-- Sample Hand -->
+        <div id="sampleHandSection" class="sample-hand-section" style="display: none;">
+            <div class="sample-hand-header">
+                <h3 class="section-title">Sample Hand</h3>
+                <button id="redrawBtn" class="redraw-btn">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="16,3 21,3 21,8"></polyline>
+                        <line x1="4" y1="20" x2="21" y2="3"></line>
+                        <polyline points="21,16 21,21 16,21"></polyline>
+                        <line x1="15" y1="15" x2="21" y2="21"></line>
+                        <line x1="4" y1="4" x2="9" y2="9"></line>
+                    </svg>
+                    Redraw
+                </button>
+            </div>
+            <div id="sampleHand" class="sample-hand"></div>
+        </div>
+
+        <!-- Mana Curve -->
+        <div class="mana-curve-section">
+            <h3 class="section-title">Mana Curve</h3>
+            <div id="manaCurve" class="mana-curve"></div>
+        </div>
+
+        <!-- Card Gallery -->
+        <div id="cardGallery" class="card-gallery"></div>
+    </div>
+
+    <!-- Card Gallery -->
+    <div id="cardGallery" class="card-gallery"></div>
+</div>
+
+    <script type="module" src="script.js"></script>
+</body>
+<footer class="site-footer">
+    <div class="footer-content">
+        <div>
+            <strong>Contact:</strong>
+            <a href="mailto:sacdalanjme@gmail.com">sacdalanjme@gmail.com</a>
+        </div>
+        <div>
+            <strong>GitHub:</strong>
+            <a href="https://github.com/kinojms" target="_blank" rel="noopener noreferrer">@kinojms</a>
+        </div>
+        <div>
+            MTG Deck Spotlight &copy; 2025 &mdash; Jörmungandr, Dawn of Ragnarok
+        </div>
+        <div>
+            <small>All card images &copy; Wizards of the Coast / Scryfall</small>
+        </div>
+    </div>
+</footer>
+</html>
