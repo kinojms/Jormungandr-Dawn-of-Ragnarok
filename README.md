@@ -1,6 +1,6 @@
-# Jörmungandr, Dawn of Ragnarok — MTG Deck Spotlight
+# 🐍 Jörmungandr, Dawn of Ragnarok — MTG Deck Spotlight
 
-This project is a **Magic: The Gathering (MTG) deck spotlight website** featuring the Simic (Blue-Green) Commander deck: **Jörmungandr, Dawn of Ragnarok**. The site showcases deck details, a card gallery, mana curve visualization, and interactive features such as sample hand drawing and theme toggling.
+This project is a **Magic: The Gathering (MTG) deck spotlight** featuring the Simic (Blue-Green) Commander deck: **Koma, Cosmos Serpent**—my first ever physical MTG deck and favorite commander. The site showcases deck details, a card gallery, mana curve visualization, and interactive features such as sample hand drawing and light/dark themes.
 
 ---
 
@@ -8,7 +8,6 @@ This project is a **Magic: The Gathering (MTG) deck spotlight website** featurin
 
 **This website was created as a practice project for web development and CSS styling.**  
 It is intended to help learn and demonstrate:
-
 - Responsive web design
 - Theming (light/dark mode)
 - Custom fonts (including the MTG-style Beleren font)
@@ -21,7 +20,7 @@ It is intended to help learn and demonstrate:
 
 - **Deck Overview:** Hero section with deck name, strategy, and commander info
 - **Card Gallery:** Interactive, filterable, and sortable card display
-- **Mana Curve:** Visual representation of deck's mana curve
+- **Mana Curve:** Visual representation of the deck's mana curve
 - **Sample Hand:** Draw a random sample hand from the deck
 - **Theme Toggle:** Switch between light and dark modes
 - **Custom Fonts:** Uses fantasy/decorative fonts for headers and the Beleren font for card names and oracle text
@@ -30,10 +29,11 @@ It is intended to help learn and demonstrate:
 ---
 
 ## Technologies Used
-
-- **HTML5**
-- **CSS3** (with Google Fonts and custom font-face)
-- **JavaScript (ES6 Modules)**
+This project was built using the following stack:
+- **HTML**
+- **CSS**
+- **JavaScript**
+- Note: the images were retreived using Scryfall's API
 
 ---
 
@@ -45,9 +45,8 @@ It is intended to help learn and demonstrate:
 
 ---
 
-## Disclaimer
+## Additional Info
 
-This project is for **educational and personal practice purposes only**.  
 All Magic: The Gathering intellectual property belongs to Wizards of the Coast.
 
 ---
