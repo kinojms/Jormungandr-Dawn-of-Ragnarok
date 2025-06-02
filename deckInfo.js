@@ -85,7 +85,7 @@ const sampleDeck = {
       type: "Enchantment",
       manaCost: 4,
       colors: ["U"],
-      role: "Creates token copies of creatures",
+      role: "Returns a card from your graveyard",
     },
     {
       id: 11,

@@ -192,6 +192,9 @@ function createCardElement(card) {
                         <span class="card-type">${card.type}</span>
                         <span class="card-mana-cost">${card.manaCost}</span>
                     </div>
+                    <div>
+                      <span class="card-role">${card.role}</span>
+                    </div>
                 </div>
             </div>
             <div class="card-back">
