@@ -1,10 +1,10 @@
 // Deck information for Koma, Cosmos Serpent Commander
 const sampleDeck = {
-  name: "Koma Kage Bunshin no Jutsu",
+  name: "Jörmungandr, Dawn of Ragnarok",
   colors: ["U", "G"],
   format: "Commander",
   strategy:
-    "This Simic deck creates an unstoppable army of serpent tokens with Koma, Cosmos Serpent at the helm. Generate tokens every upkeep, protect your board, and overwhelm opponents with a sea of serpents.",
+    "This Simic deck focuses on token generation and cloning effects to create an overwhelming board presence. The strategy revolves around generating serpent tokens with Koma and then multiplying them through various doubling effects and clone spells.",
   commander: "Koma, Cosmos Serpent",
   cards: [
     {
@@ -13,7 +13,7 @@ const sampleDeck = {
       type: "Legendary Creature",
       manaCost: 4,
       colors: ["U", "G"],
-      role: "Doubles the number of tokens you create",
+      role: "Token Doubler",
     },
     {
       id: 2,
@@ -21,7 +21,7 @@ const sampleDeck = {
       type: "Legendary Creature",
       manaCost: 5,
       colors: ["U", "G"],
-      role: "Provides card draw and extra land drops",
+      role: "Draw Engine",
     },
     {
       id: 3,
@@ -29,7 +29,7 @@ const sampleDeck = {
       type: "Instant",
       manaCost: 1,
       colors: ["U"],
-      role: "Cheap counterspell with minor drawback",
+      role: "Protection",
     },
     {
       id: 4,
@@ -37,7 +37,7 @@ const sampleDeck = {
       type: "Creature",
       manaCost: 6,
       colors: ["G"],
-      role: "Landfall value engine and graveyard recursion",
+      role: "Recursion",
     },
     {
       id: 5,
@@ -45,7 +45,7 @@ const sampleDeck = {
       type: "Enchantment",
       manaCost: 3,
       colors: ["U"],
-      role: "Makes all creatures share a creature type",
+      role: "Tribal Support",
     },
     {
       id: 6,
@@ -53,7 +53,7 @@ const sampleDeck = {
       type: "Artifact",
       manaCost: 2,
       colors: [],
-      role: "Mana rock that produces commander colors",
+      role: "Ramp",
     },
     {
       id: 7,
@@ -61,7 +61,7 @@ const sampleDeck = {
       type: "Enchantment Creature",
       manaCost: 6,
       colors: ["U"],
-      role: "Gives all creatures flying and removes flying from opponents",
+      role: "Evasion",
     },
     {
       id: 8,
@@ -69,7 +69,7 @@ const sampleDeck = {
       type: "Legendary Creature",
       manaCost: 4,
       colors: ["U", "G"],
-      role: "Mana dork that becomes a massive creature",
+      role: "Ramp",
     },
     {
       id: 9,
@@ -77,7 +77,7 @@ const sampleDeck = {
       type: "Enchantment",
       manaCost: 5,
       colors: ["G"],
-      role: "Protects creatures from targeted removal",
+      role: "Protection",
     },
     {
       id: 10,
@@ -85,7 +85,7 @@ const sampleDeck = {
       type: "Enchantment",
       manaCost: 4,
       colors: ["U"],
-      role: "Returns a card from your graveyard",
+      role: "Cloning",
     },
     {
       id: 11,
@@ -93,7 +93,7 @@ const sampleDeck = {
       type: "Land",
       manaCost: 0,
       colors: ["G"],
-      role: "Copies a card from your graveyard",
+      role: "Lands",
     },
     {
       id: 12,
@@ -101,7 +101,7 @@ const sampleDeck = {
       type: "Artifact",
       manaCost: 5,
       colors: [],
-      role: "Tribal support and token creation",
+      role: "Tribal Support",
     },
     {
       id: 13,
@@ -109,7 +109,7 @@ const sampleDeck = {
       type: "Legendary Land",
       manaCost: 0,
       colors: ["G"],
-      role: "Utility land with artifact/enchantment removal",
+      role: "Lands",
     },
     {
       id: 14,
@@ -117,7 +117,7 @@ const sampleDeck = {
       type: "Sorcery",
       manaCost: 2,
       colors: ["G"],
-      role: "Destroys artifact or enchantment and ramps",
+      role: "Removal",
     },
     {
       id: 15,
@@ -125,7 +125,7 @@ const sampleDeck = {
       type: "Enchantment",
       manaCost: 1,
       colors: ["G"],
-      role: "Accelerates land drops on opponents' turns",
+      role: "Ramp",
     },
     {
       id: 16,
@@ -133,7 +133,7 @@ const sampleDeck = {
       type: "Land",
       manaCost: 0,
       colors: ["G"],
-      role: "Utility land that produces extra mana for creatures",
+      role: "Lands",
     },
     {
       id: 17,
@@ -141,7 +141,7 @@ const sampleDeck = {
       type: "Land",
       manaCost: 0,
       colors: [],
-      role: "Puts commander into hand to avoid commander tax",
+      role: "Lands",
     },
     {
       id: 18,
@@ -149,7 +149,7 @@ const sampleDeck = {
       type: "Land",
       manaCost: 0,
       colors: [],
-      role: "Perfect mana fixing for commander colors",
+      role: "Lands",
     },
     {
       id: 19,
@@ -157,7 +157,7 @@ const sampleDeck = {
       type: "Creature",
       manaCost: 8,
       colors: ["G"],
-      role: "Game-ending finisher that buffs all creatures",
+      role: "Gamechanger",
     },
     {
       id: 20,
@@ -165,7 +165,7 @@ const sampleDeck = {
       type: "Sorcery",
       manaCost: 3,
       colors: ["G"],
-      role: "Ramp spell that fetches two lands",
+      role: "Ramp",
     },
     {
       id: 21,
@@ -173,7 +173,7 @@ const sampleDeck = {
       type: "Instant",
       manaCost: 2,
       colors: ["U"],
-      role: "Bounce spell with powerful overload option",
+      role: "Removal",
     },
     {
       id: 22,
@@ -181,7 +181,7 @@ const sampleDeck = {
       type: "Artifact",
       manaCost: 3,
       colors: [],
-      role: "Mana rock with card draw potential",
+      role: "Ramp",
     },
     {
       id: 23,
@@ -189,7 +189,7 @@ const sampleDeck = {
       type: "Enchantment",
       manaCost: 3,
       colors: ["G"],
-      role: "Tutors two creatures when opponents have many creatures",
+      role: "Tutor",
     },
     {
       id: 24,
@@ -197,7 +197,7 @@ const sampleDeck = {
       type: "Creature",
       manaCost: 1,
       colors: ["G"],
-      role: "Mana dork that makes legendary spells uncounterable",
+      role: "Ramp",
     },
     {
       id: 25,
@@ -205,7 +205,7 @@ const sampleDeck = {
       type: "Sorcery",
       manaCost: 4,
       colors: ["U"],
-      role: "Creates a token copy of a creature",
+      role: "Cloning",
     },
     {
       id: 26,
@@ -213,7 +213,7 @@ const sampleDeck = {
       type: "Enchantment",
       manaCost: 5,
       colors: ["G"],
-      role: "Doubles tokens and counters",
+      role: "Token Doubler",
     },
     {
       id: 27,
@@ -221,7 +221,7 @@ const sampleDeck = {
       type: "Artifact",
       manaCost: 5,
       colors: [],
-      role: "Makes creatures indestructible and flying",
+      role: "Protection",
     },
     {
       id: 28,
@@ -229,7 +229,7 @@ const sampleDeck = {
       type: "Enchantment",
       manaCost: 2,
       colors: ["G"],
-      role: "Provides life gain and creature buffs",
+      role: "Value Engine",
     },
     {
       id: 29,
@@ -237,7 +237,7 @@ const sampleDeck = {
       type: "Legendary Creature",
       manaCost: 4,
       colors: ["U", "G"],
-      role: "Turns token creation into copying other creatures",
+      role: "Cloning",
     },
     {
       id: 30,
@@ -245,7 +245,7 @@ const sampleDeck = {
       type: "Creature",
       manaCost: 3,
       colors: ["G"],
-      role: "Returns card from graveyard to hand",
+      role: "Recursion",
     },
     {
       id: 31,
@@ -253,7 +253,7 @@ const sampleDeck = {
       type: "Land",
       manaCost: 0,
       colors: [],
-      role: "Fetch land for basic lands",
+      role: "Lands",
     },
     {
       id: 32,
@@ -261,7 +261,7 @@ const sampleDeck = {
       type: "Sorcery",
       manaCost: 4,
       colors: ["G"],
-      role: "Ramp spell that puts two lands into play",
+      role: "Ramp",
     },
     {
       id: 33,
@@ -269,7 +269,7 @@ const sampleDeck = {
       type: "Land",
       manaCost: 0,
       colors: [],
-      role: "Fetch land that enters untapped later",
+      role: "Lands",
     },
     {
       id: 34,
@@ -277,7 +277,7 @@ const sampleDeck = {
       type: "Creature",
       manaCost: 2,
       colors: ["G"],
-      role: "Mana dork with eternalize ability",
+      role: "Ramp",
     },
     {
       id: 35,
@@ -285,7 +285,7 @@ const sampleDeck = {
       type: "Instant",
       manaCost: 3,
       colors: ["U"],
-      role: "Free counterspell if you control your commander",
+      role: "Protection",
     },
     {
       id: 36,
@@ -293,7 +293,7 @@ const sampleDeck = {
       type: "Basic Land",
       manaCost: 0,
       colors: ["G"],
-      role: "Basic green mana source",
+      role: "Lands",
     },
     {
       id: 37,
@@ -301,15 +301,15 @@ const sampleDeck = {
       type: "Enchantment",
       manaCost: 3,
       colors: ["G"],
-      role: "Draws cards for large creatures and gives trample",
+      role: "Draw Engine",
     },
     {
       id: 38,
       name: "Nyxbloom Ancient",
       type: "Enchantment Creature",
-      manaCost: 3,
+      manaCost: 7,
       colors: ["G"],
-      role: "Triples mana generation from permanents",
+      role: "Ramp",
     },
     {
       id: 39,
@@ -317,7 +317,7 @@ const sampleDeck = {
       type: "Legendary Artifact",
       manaCost: 4,
       colors: [],
-      role: "Creates token copies of equipped creature",
+      role: "Cloning",
     },
     {
       id: 40,
@@ -325,7 +325,7 @@ const sampleDeck = {
       type: "Instant",
       manaCost: 2,
       colors: ["G"],
-      role: "Protects permanents from removal",
+      role: "Protection",
     },
     {
       id: 41,
@@ -333,7 +333,7 @@ const sampleDeck = {
       type: "Land",
       manaCost: 0,
       colors: ["U", "G"],
-      role: "Dual land that enters untapped with basics",
+      role: "Lands",
     },
     {
       id: 42,
@@ -341,7 +341,7 @@ const sampleDeck = {
       type: "Enchantment",
       manaCost: 3,
       colors: ["U"],
-      role: "Neutralizes problematic permanents",
+      role: "Removal",
     },
     {
       id: 43,
@@ -349,7 +349,7 @@ const sampleDeck = {
       type: "Sorcery",
       manaCost: 3,
       colors: ["U"],
-      role: "Creates token copy and gives it to opponent",
+      role: "Cloning",
     },
     {
       id: 44,
@@ -357,7 +357,7 @@ const sampleDeck = {
       type: "Basic Land",
       manaCost: 0,
       colors: ["U"],
-      role: "Basic blue mana source",
+      role: "Lands",
     },
     {
       id: 45,
@@ -365,7 +365,7 @@ const sampleDeck = {
       type: "Legendary Creature",
       manaCost: 2,
       colors: ["G"],
-      role: "Makes tokens into mana dorks",
+      role: "Ramp",
     },
     {
       id: 46,
@@ -373,7 +373,7 @@ const sampleDeck = {
       type: "Creature",
       manaCost: 5,
       colors: ["U"],
-      role: "Taps artifacts and draws cards",
+      role: "Removal",
     },
     {
       id: 47,
@@ -381,7 +381,7 @@ const sampleDeck = {
       type: "Sorcery",
       manaCost: 3,
       colors: ["G"],
-      role: "Ramp spell similar to Cultivate",
+      role: "Ramp",
     },
     {
       id: 48,
@@ -389,7 +389,7 @@ const sampleDeck = {
       type: "Legendary Creature",
       manaCost: 7,
       colors: ["U", "G"],
-      role: "Commander that creates serpent tokens",
+      role: "Commander",
     },
     {
       id: 49,
@@ -397,7 +397,7 @@ const sampleDeck = {
       type: "Legendary Creature",
       manaCost: 6,
       colors: ["U", "G"],
-      role: "Alternative Koma with different abilities",
+      role: "Cloning",
     },
     {
       id: 50,
@@ -405,7 +405,7 @@ const sampleDeck = {
       type: "Sorcery",
       manaCost: 6,
       colors: ["G"],
-      role: "Mass creature token creation",
+      role: "Token Generator",
     },
     {
       id: 51,
@@ -413,7 +413,7 @@ const sampleDeck = {
       type: "Sorcery",
       manaCost: 4,
       colors: ["G"],
-      role: "Ramp spell with cycling option",
+      role: "Ramp",
     },
     {
       id: 52,
@@ -421,7 +421,7 @@ const sampleDeck = {
       type: "Artifact",
       manaCost: 3,
       colors: [],
-      role: "Allows multiple legendary creatures",
+      role: "Tribal Support",
     },
     {
       id: 53,
@@ -429,7 +429,7 @@ const sampleDeck = {
       type: "Land",
       manaCost: 0,
       colors: ["U"],
-      role: "Utility land with creature creation",
+      role: "Lands",
     },
     {
       id: 54,
@@ -437,7 +437,7 @@ const sampleDeck = {
       type: "Land",
       manaCost: 0,
       colors: ["G"],
-      role: "Hideaway land for free spells",
+      role: "Lands",
     },
     {
       id: 55,
@@ -445,7 +445,7 @@ const sampleDeck = {
       type: "Creature",
       manaCost: 5,
       colors: ["U", "G"],
-      role: "Untaps creatures and buffs them",
+      role: "Value Engine",
     },
     {
       id: 56,
@@ -453,7 +453,7 @@ const sampleDeck = {
       type: "Land",
       manaCost: 0,
       colors: [],
-      role: "Utility land that fetches basic lands",
+      role: "Lands",
     },
     {
       id: 57,
@@ -461,7 +461,7 @@ const sampleDeck = {
       type: "Instant",
       manaCost: 2,
       colors: ["U"],
-      role: "Makes creatures enter as copies of target",
+      role: "Cloning",
     },
     {
       id: 58,
@@ -469,7 +469,7 @@ const sampleDeck = {
       type: "Sorcery",
       manaCost: 2,
       colors: ["G"],
-      role: "Ramp spell that gets Forest into play",
+      role: "Ramp",
     },
     {
       id: 59,
@@ -477,7 +477,7 @@ const sampleDeck = {
       type: "Creature",
       manaCost: 4,
       colors: ["G"],
-      role: "Gives creatures deathtouch and card draw",
+      role: "Draw Engine",
     },
     {
       id: 60,
@@ -485,7 +485,7 @@ const sampleDeck = {
       type: "Legendary Land",
       manaCost: 0,
       colors: ["U"],
-      role: "Utility land with bounce effect",
+      role: "Lands",
     },
     {
       id: 61,
@@ -493,7 +493,7 @@ const sampleDeck = {
       type: "Enchantment",
       manaCost: 3,
       colors: ["U"],
-      role: "Taxes opponents for attacking you",
+      role: "Protection",
     },
     {
       id: 62,
@@ -501,7 +501,7 @@ const sampleDeck = {
       type: "Sorcery",
       manaCost: 2,
       colors: ["G"],
-      role: "Basic ramp spell",
+      role: "Ramp",
     },
     {
       id: 63,
@@ -509,7 +509,7 @@ const sampleDeck = {
       type: "Land",
       manaCost: 0,
       colors: ["U", "G"],
-      role: "Dual land that enters untapped in multiplayer",
+      role: "Lands",
     },
     {
       id: 64,
@@ -517,7 +517,7 @@ const sampleDeck = {
       type: "Land",
       manaCost: 0,
       colors: [],
-      role: "Removes maximum hand size",
+      role: "Lands",
     },
     {
       id: 65,
@@ -525,7 +525,7 @@ const sampleDeck = {
       type: "Enchantment",
       manaCost: 3,
       colors: ["U"],
-      role: "Powerful card draw engine",
+      role: "Draw Engine",
     },
     {
       id: 66,
@@ -533,7 +533,7 @@ const sampleDeck = {
       type: "Artifact Creature",
       manaCost: 4,
       colors: [],
-      role: "Doubles triggered abilities of chosen creature type",
+      role: "Tribal Support",
     },
     {
       id: 67,
@@ -541,7 +541,7 @@ const sampleDeck = {
       type: "Legendary Creature",
       manaCost: 4,
       colors: ["U"],
-      role: "Clone that can copy legendary creatures",
+      role: "Cloning",
     },
     {
       id: 68,
@@ -549,7 +549,7 @@ const sampleDeck = {
       type: "Creature",
       manaCost: 3,
       colors: ["G"],
-      role: "Creates token copies with landfall",
+      role: "Token Generator",
     },
     {
       id: 69,
@@ -557,7 +557,7 @@ const sampleDeck = {
       type: "Instant",
       manaCost: 3,
       colors: ["G"],
-      role: "Doubles all tokens you control",
+      role: "Token Doubler",
     },
     {
       id: 70,
@@ -565,7 +565,7 @@ const sampleDeck = {
       type: "Creature",
       manaCost: 5,
       colors: ["G"],
-      role: "Untaps permanents on each opponent's turn",
+      role: "Value Engine",
     },
     {
       id: 71,
@@ -573,7 +573,7 @@ const sampleDeck = {
       type: "Creature",
       manaCost: 7,
       colors: ["U"],
-      role: "Large serpent with kicker ability",
+      role: "Threat",
     },
     {
       id: 72,
@@ -581,7 +581,7 @@ const sampleDeck = {
       type: "Land",
       manaCost: 0,
       colors: ["U", "G"],
-      role: "Bounce land that produces two mana",
+      role: "Lands",
     },
     {
       id: 73,
@@ -589,7 +589,7 @@ const sampleDeck = {
       type: "Sorcery",
       manaCost: 4,
       colors: ["G"],
-      role: "Ramp spell that gets Forests into play untapped",
+      role: "Ramp",
     },
     {
       id: 74,
@@ -597,7 +597,7 @@ const sampleDeck = {
       type: "Artifact",
       manaCost: 1,
       colors: [],
-      role: "Fast mana acceleration",
+      role: "Ramp",
     },
     {
       id: 75,
@@ -605,7 +605,7 @@ const sampleDeck = {
       type: "Creature",
       manaCost: 4,
       colors: ["U"],
-      role: "Clone that can copy planeswalkers and legendaries",
+      role: "Cloning",
     },
     {
       id: 76,
@@ -613,7 +613,7 @@ const sampleDeck = {
       type: "Creature",
       manaCost: 6,
       colors: ["U"],
-      role: "Creates tokens when attacking with large creatures",
+      role: "Token Generator",
     },
     {
       id: 77,
@@ -621,7 +621,7 @@ const sampleDeck = {
       type: "Instant",
       manaCost: 1,
       colors: ["U"],
-      role: "Cheap counterspell with ferocious upside",
+      role: "Protection",
     },
     {
       id: 78,
@@ -629,7 +629,7 @@ const sampleDeck = {
       type: "Legendary Creature",
       manaCost: 5,
       colors: ["U", "G"],
-      role: "Draws cards and gains life from landfall",
+      role: "Draw Engine",
     },
     {
       id: 79,
@@ -637,7 +637,7 @@ const sampleDeck = {
       type: "Land",
       manaCost: 0,
       colors: [],
-      role: "Produces two mana if you have enough lands",
+      role: "Lands",
     },
     {
       id: 80,
@@ -645,7 +645,7 @@ const sampleDeck = {
       type: "Land",
       manaCost: 0,
       colors: [],
-      role: "Fetch land for basic lands",
+      role: "Lands",
     },
     {
       id: 81,
@@ -653,7 +653,7 @@ const sampleDeck = {
       type: "Legendary Artifact",
       manaCost: 9,
       colors: [],
-      role: "Powerful value engine that costs less with creatures",
+      role: "Value Engine",
     },
     {
       id: 82,
@@ -661,7 +661,7 @@ const sampleDeck = {
       type: "Land",
       manaCost: 0,
       colors: [],
-      role: "Utility land with creature type synergies",
+      role: "Lands",
     },
     {
       id: 83,
@@ -669,7 +669,7 @@ const sampleDeck = {
       type: "Land",
       manaCost: 0,
       colors: ["U", "G"],
-      role: "Original dual land with no drawbacks",
+      role: "Lands",
     },
     {
       id: 84,
@@ -677,7 +677,7 @@ const sampleDeck = {
       type: "Creature",
       manaCost: 7,
       colors: ["G"],
-      role: "Large creature that gains life equal to its power",
+      role: "Threat",
     },
     {
       id: 85,
@@ -685,7 +685,7 @@ const sampleDeck = {
       type: "Land",
       manaCost: 0,
       colors: ["U", "G"],
-      role: "Dual land that enters untapped with spell condition",
+      role: "Lands",
     },
     {
       id: 86,
@@ -693,7 +693,7 @@ const sampleDeck = {
       type: "Sorcery",
       manaCost: 4,
       colors: ["U"],
-      role: "Mass bounce spell that spares large creatures",
+      role: "Removal",
     },
     {
       id: 87,
@@ -701,7 +701,7 @@ const sampleDeck = {
       type: "Creature",
       manaCost: 4,
       colors: ["U"],
-      role: "Gives all creatures flying from graveyard",
+      role: "Evasion",
     },
     {
       id: 88,
@@ -709,7 +709,7 @@ const sampleDeck = {
       type: "Instant",
       manaCost: 1,
       colors: ["G"],
-      role: "Tutors creature to top of library",
+      role: "Tutor",
     },
     {
       id: 89,
@@ -717,7 +717,7 @@ const sampleDeck = {
       type: "Legendary Land",
       manaCost: 0,
       colors: ["G"],
-      role: "Makes all lands into Forests",
+      role: "Lands",
     },
   ],
 }

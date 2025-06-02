@@ -38,14 +38,12 @@
             <h1 class="deck-title">Jörmungandr, Dawn of Ragnarok</h1>
             <div class="format-badge">Commander</div>
             <p class="deck-strategy">
-                This Simic deck creates an unstoppable army of serpent tokens with Koma, Cosmos Serpent at the helm.
-                Generate tokens every upkeep, protect your board, and overwhelm opponents with a sea of serpents.
+                This Simic deck focuses on token generation and cloning effects to create an overwhelming board presence. 
+                The strategy revolves around generating serpent tokens with Koma and then multiplying them through various 
+                doubling effects and clone spells.
             </p>
-            <div class="commander-info">
-                <span class="commander-label">Commander:</span> Koma, Cosmos Serpent
-            </div>
             <div>
-                <p>
+                <p class="deck-link">
                     View the full decklist
                     <a href="https://archidekt.com/decks/13414144/koma_copy_cards_edh" target="_blank" rel="noopener noreferrer">here</a>
                     on Archidekt
@@ -54,8 +52,30 @@
         </div>
     </div>
 
-    <!-- Controls Section -->
+    <!-- Commander Spotlight Section -->
     <div class="container">
+        <div class="commander-spotlight">
+            <h2 class="section-title">Commander Spotlight</h2>
+            <div class="commander-card" id="commanderCard">
+                <div class="commander-image">
+                    <svg class="card-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.9 18.55c.06-.43.1-.86.1-1.3 0-1.77-.77-3.37-2-4.47V9.5c0-1.1-.9-2-2-2h-2V5c0-1.1-.9-2-2-2h-2c-1.1 0-2 .9-2 2v2.5H7c-1.1 0-2 .9-2 2v3.28c-1.23 1.1-2 2.7-2 4.47 0 .44.04.87.1 1.3-1.28.47-2.1 1.7-2.1 3.1 0 1.88 1.56 3.35 3.35 3.35 1.44 0 2.67-.88 3.15-2.15.48.17.98.3 1.5.3.52 0 1.02-.13 1.5-.3.48 1.27 1.71 2.15 3.15 2.15 1.79 0 3.35-1.47 3.35-3.35 0-1.4-.82-2.63-2.1-3.1zM6 19.5c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"></path>
+                    </svg>
+                </div>
+                <div class="commander-details">
+                    <h3 class="commander-name">Koma, Cosmos Serpent</h3>
+                    <div class="commander-cost">7 Mana</div>
+                    <div class="commander-type">Legendary Creature — Serpent</div>
+                    <div class="commander-strategy-text">
+                        <strong>Core Strategy:</strong> Koma generates a 3/3 serpent token every upkeep and can sacrifice serpents to tap any permanent. 
+                        The deck amplifies this with token doublers like Doubling Season and clone effects like Spark Double to create multiple Komas 
+                        or copy other valuable permanents for exponential value.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls Section -->
         <div class="controls-section">
             <div class="filter-controls">
                 <div class="control-group">
@@ -83,6 +103,7 @@
                         <option value="name">Name</option>
                         <option value="mana">Mana Cost</option>
                         <option value="type">Type</option>
+                        <option value="role">Category</option>
                     </select>
                 </div>
 
@@ -121,17 +142,16 @@
 
         <!-- Mana Curve -->
         <div class="mana-curve-section">
-            <h3 class="section-title">Mana Curve</h3>
+            <h3 class="section-title">Mana Curve Distribution</h3>
+            <div class="curve-explanation">
+                <p>This chart shows how many cards cost each amount of mana. The line indicates the distribution pattern of the deck.</p>
+            </div>
             <div id="manaCurve" class="mana-curve"></div>
         </div>
 
         <!-- Card Gallery -->
         <div id="cardGallery" class="card-gallery"></div>
     </div>
-
-    <!-- Card Gallery -->
-    <div id="cardGallery" class="card-gallery"></div>
-</div>
 
     <script type="module" src="script.js"></script>
 </body>
@@ -148,6 +168,7 @@
         <div>
             <strong>Discord:</strong>
             <span>@tsukino138</span>
+        </div>
 
         <div class="footer-info">
             MTG Deck Spotlight &copy; 2025 &mdash; Jörmungandr, Dawn of Ragnarok
