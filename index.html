@@ -75,6 +75,15 @@
             </div>
         </div>
 
+        <!-- Mana Curve -->
+        <div class="mana-curve-section">
+            <h3 class="section-title">Mana Curve Distribution</h3>
+            <div class="curve-explanation">
+                <p>This chart shows how many cards cost each amount of mana. The line indicates the distribution pattern of the deck.</p>
+            </div>
+            <div id="manaCurve" class="mana-curve"></div>
+        </div>
+
         <!-- Controls Section -->
         <div class="controls-section">
             <div class="filter-controls">
@@ -109,24 +118,49 @@
 
                 <button id="sortDirBtn" title="Toggle sort order">⇅</button>
             </div>
-
-            <button id="drawHandBtn" class="draw-hand-btn">
-                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="16,3 21,3 21,8"></polyline>
-                    <line x1="4" y1="20" x2="21" y2="3"></line>
-                    <polyline points="21,16 21,21 16,21"></polyline>
-                    <line x1="15" y1="15" x2="21" y2="21"></line>
-                    <line x1="4" y1="4" x2="9" y2="9"></line>
-                </svg>
-                Draw Sample Hand
-            </button>
         </div>
 
-        <!-- Sample Hand -->
-        <div id="sampleHandSection" class="sample-hand-section" style="display: none;">
+        <!-- Card Carousel -->
+        <div class="card-showcase">
+            <h3 class="section-title">Card Gallery</h3>
+            <div class="carousel-container">
+                <button id="prevBtn" class="carousel-nav prev-btn" aria-label="Previous cards">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15,18 9,12 15,6"></polyline>
+                    </svg>
+                </button>
+                <div class="carousel-wrapper">
+                    <div id="cardCarousel" class="card-carousel"></div>
+                </div>
+                <button id="nextBtn" class="carousel-nav next-btn" aria-label="Next cards">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9,18 15,12 9,6"></polyline>
+                    </svg>
+                </button>
+            </div>
+            <div class="carousel-navigation">
+                <button id="goToStartBtn" class="carousel-nav-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="11,17 6,12 11,7"></polyline>
+                        <polyline points="18,17 13,12 18,7"></polyline>
+                    </svg>
+                    Go to Start
+                </button>
+                <button id="goToEndBtn" class="carousel-nav-btn">
+                    Go to End
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="13,17 18,12 13,7"></polyline>
+                        <polyline points="6,17 11,12 6,7"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Sample Hand Section -->
+        <div class="sample-hand-section">
             <div class="sample-hand-header">
                 <h3 class="section-title">Sample Hand</h3>
-                <button id="redrawBtn" class="redraw-btn">
+                <button id="drawHandBtn" class="draw-hand-btn">
                     <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="16,3 21,3 21,8"></polyline>
                         <line x1="4" y1="20" x2="21" y2="3"></line>
@@ -134,23 +168,11 @@
                         <line x1="15" y1="15" x2="21" y2="21"></line>
                         <line x1="4" y1="4" x2="9" y2="9"></line>
                     </svg>
-                    Redraw
+                    Draw Sample Hand
                 </button>
             </div>
-            <div id="sampleHand" class="sample-hand"></div>
+            <div id="sampleHand" class="sample-hand" style="display: none;"></div>
         </div>
-
-        <!-- Mana Curve -->
-        <div class="mana-curve-section">
-            <h3 class="section-title">Mana Curve Distribution</h3>
-            <div class="curve-explanation">
-                <p>This chart shows how many cards cost each amount of mana. The line indicates the distribution pattern of the deck.</p>
-            </div>
-            <div id="manaCurve" class="mana-curve"></div>
-        </div>
-
-        <!-- Card Gallery -->
-        <div id="cardGallery" class="card-gallery"></div>
     </div>
 
     <script type="module" src="script.js"></script>

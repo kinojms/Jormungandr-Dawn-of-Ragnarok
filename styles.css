@@ -7,14 +7,14 @@
 }
 
 :root {
-  /* Light theme - improved contrast */
-  --bg-primary: #f8f7f4;
-  --bg-secondary: #eeebe6;
-  --bg-tertiary: #e4e0d8;
-  --text-primary: #1a1a1a;
-  --text-secondary: #2d2d2d;
+  /* Light theme - improved contrast with warmer, less bright colors */
+  --bg-primary: #f2f0e6;
+  --bg-secondary: #e8e4d8;
+  --bg-tertiary: #ddd8c9;
+  --text-primary: #2a2a2a;
+  --text-secondary: #3d3d3d;
   --text-muted: #5a5a5a;
-  --border-color: #d0ccc4;
+  --border-color: #c5c0b3;
   --shadow-color: rgba(26, 26, 26, 0.15);
   --accent-blue: #0891b2;
   --accent-green: #059669;
@@ -294,7 +294,7 @@ h6 {
 .controls-section {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 1rem;
   margin: 2rem 0;
@@ -338,8 +338,7 @@ h6 {
   border-color: var(--accent-blue);
 }
 
-.draw-hand-btn,
-.redraw-btn {
+.draw-hand-btn {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -354,8 +353,7 @@ h6 {
   transition: background-color 0.2s;
 }
 
-.draw-hand-btn:hover,
-.redraw-btn:hover {
+.draw-hand-btn:hover {
   background: var(--accent-blue-light);
 }
 
@@ -419,13 +417,14 @@ h6 {
   margin-bottom: 1.5rem;
   background: var(--bg-primary);
   border-radius: 0.5rem;
-  padding: 1rem;
+  padding: 0.5rem;
   border: 1px solid var(--border-color);
+  width: 100%;
 }
 
 .line-chart {
   width: 100%;
-  height: 350px;
+  height: 280px;
 }
 
 .curve-line {
@@ -508,13 +507,13 @@ h6 {
   border-radius: 0.5rem;
   border: 1px solid var(--border-color);
   text-align: center;
-  /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* .stat-card:hover {
+.stat-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px var(--shadow-color);
-} */
+}
 
 .stat-value {
   font-size: 1.5rem;
@@ -530,32 +529,37 @@ h6 {
 }
 
 .sample-hand-section {
-  margin: 2rem 0;
-  padding: 1.5rem;
+  margin: 3rem 0 2rem 0;
+  padding: 2rem;
   background: var(--bg-secondary);
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   border: 1px solid var(--border-color);
-  box-shadow: 0 2px 8px var(--shadow-color);
+  box-shadow: 0 4px 12px var(--shadow-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.sample-hand-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+  border-radius: 0.75rem 0.75rem 0 0;
 }
 
 .sample-hand-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
 }
 
-.redraw-btn {
-  padding: 0.5rem 1rem;
-  font-size: 0.75rem;
-  border: 1px solid var(--accent-green);
-  background: transparent;
-  color: var(--accent-green);
-}
-
-.redraw-btn:hover {
-  background: var(--accent-green);
-  color: white;
+.sample-hand-header .section-title {
+  margin-bottom: 0;
 }
 
 .sample-hand {
@@ -583,17 +587,132 @@ h6 {
   color: var(--text-secondary);
 }
 
-.card-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
+/* Card Carousel */
+.card-showcase {
+  margin: 3rem 0;
+}
+
+.carousel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   margin: 2rem 0;
+  max-width: 100%;
+}
+
+.carousel-wrapper {
+  flex: 1;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px var(--shadow-color);
+  cursor: grab;
+  user-select: none;
+}
+
+.carousel-wrapper:active {
+  cursor: grabbing;
+}
+
+.card-carousel {
+  display: flex;
+  transition: transform 0.4s ease-in-out;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.carousel-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  background: var(--accent-blue);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  flex-shrink: 0;
+}
+
+.carousel-nav:hover:not(:disabled) {
+  background: var(--accent-green);
+  transform: scale(1.1);
+}
+
+.carousel-nav:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.carousel-nav svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.carousel-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.carousel-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--accent-blue);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.carousel-nav-btn:hover:not(:disabled) {
+  background: var(--accent-green);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.carousel-nav-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+}
+
+.carousel-nav-btn svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+@media (max-width: 768px) {
+  .carousel-navigation {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .carousel-nav-btn {
+    width: 100%;
+    max-width: 200px;
+    justify-content: center;
+  }
 }
 
 .card {
   perspective: 1000px;
   cursor: pointer;
   height: 360px;
+  min-width: 280px;
+  flex-shrink: 0;
 }
 
 .card-inner {
@@ -627,7 +746,7 @@ h6 {
 }
 
 .card-front {
-  background: var(--bg-secondary);
+  background: var(--bg-primary);
 }
 
 .card-back {
@@ -656,8 +775,8 @@ h6 {
 }
 
 .card-name {
-  font-family: "Cinzel", "Gloock", "Almendra SC", Georgia, serif;
-  font-weight: bold;
+  font-family: "Beleren", "Cinzel", "Gloock", "Almendra SC", Georgia, serif;
+  font-weight: normal;
   color: var(--accent-blue);
   margin-bottom: 0.5rem;
   font-size: 1rem;
@@ -682,7 +801,7 @@ h6 {
   display: inline-block;
   font-size: 0.8rem;
   color: var(--accent-green);
-  /* background: var(--text-primary); */
+  background: var(--accent-green-light);
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
   border: 1px solid var(--accent-green);
@@ -799,10 +918,6 @@ h6 {
     align-items: stretch;
   }
 
-  .card-gallery {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  }
-
   .card-oracle-text {
     font-size: 0.7rem;
   }
@@ -810,6 +925,19 @@ h6 {
   .curve-labels {
     grid-template-columns: repeat(4, 1fr);
     gap: 0.25rem;
+  }
+
+  .carousel-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .carousel-nav {
+    display: none;
+  }
+
+  .card {
+    min-width: 250px;
   }
 }
 
@@ -841,6 +969,10 @@ h6 {
   .commander-image {
     width: 200px;
     height: 280px;
+  }
+
+  .card {
+    min-width: 220px;
   }
 }
 
