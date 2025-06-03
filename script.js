@@ -1,7 +1,6 @@
-// Import the deck data from deckInfo.js
-import sampleDeck from "./deckInfo.js"
+import sampleDeck from "./deckInfo.js" // the whole Koma deck
 
-// State management
+// state management
 let filteredCards = [...sampleDeck.cards]
 let currentFilter = "all"
 let currentSort = "name"
@@ -9,19 +8,31 @@ const flippedCards = new Set()
 const scryfallImageCache = {}
 const scryfallDataCache = {}
 
-// DOM elements
+// carousel states
+let currentSlide = 0
+let cardsPerSlide = 4
+let totalSlides = 0
+
+// mouse on-drag state
+let isDragging = false
+let startX = 0
+let scrollLeft = 0
+
 const themeToggle = document.getElementById("themeToggle")
 const typeFilter = document.getElementById("typeFilter")
 const sortBy = document.getElementById("sortBy")
 const drawHandBtn = document.getElementById("drawHandBtn")
-const redrawBtn = document.getElementById("redrawBtn")
-const cardGallery = document.getElementById("cardGallery")
-const sampleHandSection = document.getElementById("sampleHandSection")
+const cardCarousel = document.getElementById("cardCarousel")
 const sampleHand = document.getElementById("sampleHand")
 const manaCurve = document.getElementById("manaCurve")
 const commanderCard = document.getElementById("commanderCard")
+const prevBtn = document.getElementById("prevBtn")
+const nextBtn = document.getElementById("nextBtn")
+const carouselWrapper = document.querySelector(".carousel-wrapper")
+const goToStartBtn = document.getElementById("goToStartBtn")
+const goToEndBtn = document.getElementById("goToEndBtn")
 
-// Theme management
+// dark/light mode
 function initTheme() {
   const savedTheme = localStorage.getItem("theme") || "light"
   document.documentElement.setAttribute("data-theme", savedTheme)
@@ -42,23 +53,117 @@ function toggleSortDirection() {
   renderCards()
 }
 
-// Initialize the application
+// init
 function init() {
   initTheme()
   loadCommanderCard()
   renderManaCurve()
   filterAndSortCards()
   renderCards()
+  updateCardsPerSlide()
+  initCarouselDrag()
 
-  // Event listeners
   themeToggle.addEventListener("click", toggleTheme)
   typeFilter.addEventListener("change", handleFilterChange)
   sortBy.addEventListener("change", handleSortChange)
   drawHandBtn.addEventListener("click", generateSampleHand)
-  redrawBtn.addEventListener("click", generateSampleHand)
+  prevBtn.addEventListener("click", prevSlide)
+  nextBtn.addEventListener("click", nextSlide)
+  goToStartBtn.addEventListener("click", goToStart)
+  goToEndBtn.addEventListener("click", goToEnd)
+
   const sortDirBtn = document.getElementById("sortDirBtn")
   if (sortDirBtn) {
     sortDirBtn.addEventListener("click", toggleSortDirection)
+  }
+
+  window.addEventListener("resize", () => {
+    updateCardsPerSlide()
+    renderCards()
+  })
+
+  let startXTouch = 0
+  let endXTouch = 0
+
+  cardCarousel.addEventListener("touchstart", (e) => {
+    startXTouch = e.touches[0].clientX
+  })
+
+  cardCarousel.addEventListener("touchend", (e) => {
+    endXTouch = e.changedTouches[0].clientX
+    handleSwipe()
+  })
+
+  function handleSwipe() {
+    const threshold = 50
+    const diff = startXTouch - endXTouch
+
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        nextSlide()
+      } else {
+        prevSlide()
+      }
+    }
+  }
+}
+
+function initCarouselDrag() {
+  carouselWrapper.addEventListener("mousedown", startDrag)
+  carouselWrapper.addEventListener("mouseleave", endDrag)
+  carouselWrapper.addEventListener("mouseup", endDrag)
+  carouselWrapper.addEventListener("mousemove", drag)
+  carouselWrapper.addEventListener("scroll", updateIndicatorsFromScroll)
+
+
+  carouselWrapper.addEventListener("dragstart", (e) => e.preventDefault())
+}
+
+function startDrag(e) {
+  isDragging = true
+  carouselWrapper.style.cursor = "grabbing"
+  startX = e.pageX - carouselWrapper.offsetLeft
+  scrollLeft = carouselWrapper.scrollLeft
+}
+
+function endDrag() {
+  isDragging = false
+  carouselWrapper.style.cursor = "grab"
+}
+
+function drag(e) {
+  if (!isDragging) return
+  e.preventDefault()
+  const x = e.pageX - carouselWrapper.offsetLeft
+  const walk = (x - startX) * 1.7 // Reduced scroll sensitivity from 2 to 0.75
+  carouselWrapper.scrollLeft = scrollLeft - walk
+}
+
+function updateIndicatorsFromScroll() {
+  if (!carouselWrapper || totalSlides === 0) return
+
+  const scrollLeft = carouselWrapper.scrollLeft
+  const maxScroll = carouselWrapper.scrollWidth - carouselWrapper.clientWidth
+  const cardWidth = 280 + 24 // card width + gap
+  const cardsPerView = Math.floor(carouselWrapper.offsetWidth / cardWidth)
+  const newSlide = Math.round(scrollLeft / (cardWidth * cardsPerView))
+
+  if (newSlide !== currentSlide && newSlide >= 0 && newSlide < totalSlides) {
+    currentSlide = Math.min(newSlide, totalSlides - 1)
+    updateNavigationButtons()
+  }
+}
+
+function updateCardsPerSlide() {
+  const width = window.innerWidth
+  if (width < 480) {
+    cardsPerSlide = 1
+  } else if (width < 768) {
+    cardsPerSlide = 2
+  } else if (width < 1024) {
+    cardsPerSlide = 3
+  } else {
+    cardsPerSlide = 4
   }
 }
 
@@ -74,7 +179,7 @@ function loadCommanderCard() {
   }
 }
 
-// Filter and sort functions
+// filtering and sorting
 function handleFilterChange(e) {
   currentFilter = e.target.value
   filterAndSortCards()
@@ -103,7 +208,7 @@ function filterAndSortCards() {
   })
 }
 
-// Enhanced Scryfall fetcher that gets both image and card data
+// get scryfall data
 async function fetchCardData(cardName) {
   if (scryfallDataCache[cardName]) {
     return scryfallDataCache[cardName]
@@ -141,37 +246,70 @@ async function fetchCardData(cardName) {
   }
 }
 
-// Legacy function for backward compatibility
 async function fetchCardImage(cardName) {
   const data = await fetchCardData(cardName)
   return data.image
 }
 
-// Format oracle text for better readability
 function formatOracleText(oracleText) {
   if (!oracleText) return "No card text available."
 
-  // Replace newlines with proper breaks and format common MTG symbols
   return oracleText
     .replace(/\n/g, "\n\n")
     .replace(/\{([^}]+)\}/g, "($1)") // Convert mana symbols to readable format
     .replace(/•/g, "•") // Ensure bullet points display correctly
 }
 
-// Format mana cost for display
 function formatManaCost(manaCost) {
   if (!manaCost) return ""
   return manaCost.replace(/\{([^}]+)\}/g, "($1)")
 }
 
-// Render functions
-function renderCards() {
-  cardGallery.innerHTML = ""
+function smoothScrollTo(element, targetScrollLeft, duration = 400) {
+  const startScrollLeft = element.scrollLeft
+  const distance = targetScrollLeft - startScrollLeft
+  const startTime = performance.now()
 
-  filteredCards.forEach((card) => {
+  function animation(currentTime) {
+    const timeElapsed = currentTime - startTime
+    const progress = Math.min(timeElapsed / duration, 1)
+
+    const easeOut = 1 - Math.pow(1 - progress, 3)
+
+    element.scrollLeft = startScrollLeft + distance * easeOut
+
+    if (progress < 1) {
+      requestAnimationFrame(animation)
+    }
+  }
+
+  requestAnimationFrame(animation)
+}
+
+function canScrollLeft() {
+  return carouselWrapper.scrollLeft > 0
+}
+
+function canScrollRight() {
+  const maxScroll = carouselWrapper.scrollWidth - carouselWrapper.clientWidth
+  return carouselWrapper.scrollLeft < maxScroll - 1 // -1 for floating point precision
+}
+
+// Carousel
+function renderCards() {
+  cardCarousel.innerHTML = ""
+  currentSlide = 0
+
+  totalSlides = Math.ceil(filteredCards.length / cardsPerSlide)
+
+  filteredCards.forEach((card, index) => {
     const cardElement = createCardElement(card)
-    cardGallery.appendChild(cardElement)
+    cardCarousel.appendChild(cardElement)
   })
+
+  carouselWrapper.scrollLeft = 0
+
+  updateNavigationButtons()
 }
 
 function createCardElement(card) {
@@ -179,7 +317,6 @@ function createCardElement(card) {
   cardDiv.className = "card"
   cardDiv.dataset.cardId = card.id
 
-  // Placeholder serpent icon SVG
   const iconPath = `<path d="M20.9 18.55c.06-.43.1-.86.1-1.3 0-1.77-.77-3.37-2-4.47V9.5c0-1.1-.9-2-2-2h-2V5c0-1.1-.9-2-2-2h-2c-1.1 0-2 .9-2 2v2.5H7c-1.1 0-2 .9-2 2v3.28c-1.23 1.1-2 2.7-2 4.47 0 .44.04.87.1 1.3-1.28.47-2.1 1.7-2.1 3.1 0 1.88 1.56 3.35 3.35 3.35 1.44 0 2.67-.88 3.15-2.15.48.17.98.3 1.5.3.52 0 1.02-.13 1.5-.3.48 1.27 1.71 2.15 3.15 2.15 1.79 0 3.35-1.47 3.35-3.35 0-1.4-.82-2.63-2.1-3.1zM6 19.5c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"></path>`
 
   cardDiv.innerHTML = `
@@ -250,6 +387,77 @@ function toggleCardFlip(cardId) {
   }
 }
 
+function nextSlide() {
+  if (canScrollRight()) {
+    const cardWidth = 280 + 24 // card width + gap
+    const scrollAmount = cardWidth * cardsPerSlide
+    const targetScrollLeft = carouselWrapper.scrollLeft + scrollAmount
+
+    smoothScrollTo(carouselWrapper, targetScrollLeft, 400)
+
+    if (currentSlide < totalSlides - 1) {
+      currentSlide++
+    }
+  } else {
+    smoothScrollTo(carouselWrapper, 0, 400)
+    currentSlide = 0
+  }
+
+  updateNavigationButtons()
+}
+
+function prevSlide() {
+  if (canScrollLeft()) {
+    const cardWidth = 280 + 24 // card width + gap
+    const scrollAmount = cardWidth * cardsPerSlide
+    const targetScrollLeft = carouselWrapper.scrollLeft - scrollAmount
+
+    smoothScrollTo(carouselWrapper, targetScrollLeft, 400)
+
+    if (currentSlide > 0) {
+      currentSlide--
+    }
+  } else {
+    const targetScrollLeft = carouselWrapper.scrollWidth - carouselWrapper.clientWidth
+    smoothScrollTo(carouselWrapper, targetScrollLeft, 400)
+    currentSlide = totalSlides - 1
+  }
+
+  updateNavigationButtons()
+}
+
+function goToStart() {
+  smoothScrollTo(carouselWrapper, 0, 600)
+  currentSlide = 0
+  updateNavigationButtons()
+}
+
+function goToEnd() {
+  const targetScrollLeft = carouselWrapper.scrollWidth - carouselWrapper.clientWidth
+  smoothScrollTo(carouselWrapper, targetScrollLeft, 600)
+  currentSlide = totalSlides - 1
+  updateNavigationButtons()
+}
+
+function updateCarouselPosition() {
+  const translateX = -(currentSlide * (100 / cardsPerSlide) * cardsPerSlide)
+  cardCarousel.style.transform = `translateX(${translateX}%)`
+}
+
+function updateNavigationButtons() {
+// always enabled next buttons for scrolling
+  prevBtn.disabled = false
+  nextBtn.disabled = false
+
+  goToStartBtn.disabled = !canScrollLeft()
+  goToEndBtn.disabled = !canScrollRight()
+
+  prevBtn.style.opacity = canScrollLeft() ? "1" : "0.7"
+  nextBtn.style.opacity = canScrollRight() ? "1" : "0.7"
+  goToStartBtn.style.opacity = canScrollLeft() ? "1" : "0.5"
+  goToEndBtn.style.opacity = canScrollRight() ? "1" : "0.5"
+}
+
 function renderManaCurve() {
   const curve = {}
   let totalCards = 0
@@ -273,24 +481,23 @@ function renderManaCurve() {
 
   manaCurve.innerHTML = ""
 
-  // Create SVG for line chart with proper dimensions for labels
+  // line chart
   const svgContainer = document.createElement("div")
   svgContainer.className = "line-chart-container"
 
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-  svg.setAttribute("viewBox", "0 0 500 300")
+  svg.setAttribute("viewBox", "0 0 500 280") // Reduced height from 300 to 280
   svg.setAttribute("class", "line-chart")
 
-  // Add grid lines for better readability
+  // adding grid lines
   const gridGroup = document.createElementNS("http://www.w3.org/2000/svg", "g")
   gridGroup.setAttribute("class", "grid-lines")
 
-  // Vertical grid lines
   for (let i = 0; i < 8; i++) {
-    const x = i * 50 + 75
+    const x = i * 50 + 60
     const gridLine = document.createElementNS("http://www.w3.org/2000/svg", "line")
     gridLine.setAttribute("x1", x)
-    gridLine.setAttribute("y1", 50)
+    gridLine.setAttribute("y1", 30) // Reduced top margin from 50 to 30
     gridLine.setAttribute("x2", x)
     gridLine.setAttribute("y2", 220)
     gridLine.setAttribute("stroke", "var(--border-color)")
@@ -299,13 +506,12 @@ function renderManaCurve() {
     gridGroup.appendChild(gridLine)
   }
 
-  // Horizontal grid lines
   for (let i = 0; i <= 5; i++) {
-    const y = 50 + i * 34
+    const y = 30 + i * 38
     const gridLine = document.createElementNS("http://www.w3.org/2000/svg", "line")
-    gridLine.setAttribute("x1", 75)
+    gridLine.setAttribute("x1", 60)
     gridLine.setAttribute("y1", y)
-    gridLine.setAttribute("x2", 425)
+    gridLine.setAttribute("x2", 440)
     gridLine.setAttribute("y2", y)
     gridLine.setAttribute("stroke", "var(--border-color)")
     gridLine.setAttribute("stroke-width", "1")
@@ -315,12 +521,12 @@ function renderManaCurve() {
 
   svg.appendChild(gridGroup)
 
-  // Add Y-axis labels (number of cards)
+  // number of cards (y axis)
   for (let i = 0; i <= 5; i++) {
-    const y = 220 - i * 34
+    const y = 220 - i * 38 // Adjusted spacing
     const value = Math.round((maxCount / 5) * i)
     const label = document.createElementNS("http://www.w3.org/2000/svg", "text")
-    label.setAttribute("x", 65)
+    label.setAttribute("x", 50) // Reduced left margin from 65 to 50
     label.setAttribute("y", y + 5)
     label.setAttribute("text-anchor", "end")
     label.setAttribute("fill", "var(--text-secondary)")
@@ -330,9 +536,9 @@ function renderManaCurve() {
     svg.appendChild(label)
   }
 
-  // Add X-axis labels (mana costs)
+  // mana cost (x axis)
   allCosts.forEach((cost, index) => {
-    const x = index * 50 + 75
+    const x = index * 50 + 60 // Reduced left margin from 75 to 60
     const label = document.createElementNS("http://www.w3.org/2000/svg", "text")
     label.setAttribute("x", x)
     label.setAttribute("y", 240)
@@ -344,11 +550,10 @@ function renderManaCurve() {
     svg.appendChild(label)
   })
 
-  // Create line path with adjusted coordinates
   const points = allCosts
     .map((cost, index) => {
-      const x = index * 50 + 75
-      const y = 220 - (curve[cost] / maxCount) * 170
+      const x = index * 50 + 60 // Reduced left margin from 75 to 60
+      const y = 220 - (curve[cost] / maxCount) * 190 // Increased height range from 170 to 190
       return `${x},${y}`
     })
     .join(" ")
@@ -361,10 +566,9 @@ function renderManaCurve() {
   line.setAttribute("stroke-linecap", "round")
   line.setAttribute("stroke-linejoin", "round")
 
-  // Create dots for each point with adjusted coordinates
   allCosts.forEach((cost, index) => {
-    const x = index * 50 + 75
-    const y = 220 - (curve[cost] / maxCount) * 170
+    const x = index * 50 + 60 
+    const y = 220 - (curve[cost] / maxCount) * 190 
 
     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle")
     circle.setAttribute("cx", x)
@@ -375,7 +579,6 @@ function renderManaCurve() {
     circle.setAttribute("stroke-width", "2")
     svg.appendChild(circle)
 
-    // Add value labels on data points
     const valueLabel = document.createElementNS("http://www.w3.org/2000/svg", "text")
     valueLabel.setAttribute("x", x)
     valueLabel.setAttribute("y", y - 10)
@@ -390,22 +593,22 @@ function renderManaCurve() {
 
   svg.appendChild(line)
 
-  // Add axis titles
+  // line graph labels
   const yAxisTitle = document.createElementNS("http://www.w3.org/2000/svg", "text")
-  yAxisTitle.setAttribute("x", 20)
-  yAxisTitle.setAttribute("y", 135)
+  yAxisTitle.setAttribute("x", 15) // Reduced left margin from 20 to 15
+  yAxisTitle.setAttribute("y", 125)
   yAxisTitle.setAttribute("text-anchor", "middle")
   yAxisTitle.setAttribute("fill", "var(--text-primary)")
   yAxisTitle.setAttribute("font-size", "14")
   yAxisTitle.setAttribute("font-weight", "600")
   yAxisTitle.setAttribute("font-family", "Inter, sans-serif")
-  yAxisTitle.setAttribute("transform", "rotate(-90 20 135)")
+  yAxisTitle.setAttribute("transform", "rotate(-90 15 125)")
   yAxisTitle.textContent = "Number of Cards"
   svg.appendChild(yAxisTitle)
 
   const xAxisTitle = document.createElementNS("http://www.w3.org/2000/svg", "text")
   xAxisTitle.setAttribute("x", 250)
-  xAxisTitle.setAttribute("y", 270)
+  xAxisTitle.setAttribute("y", 265)
   xAxisTitle.setAttribute("text-anchor", "middle")
   xAxisTitle.setAttribute("fill", "var(--text-primary)")
   xAxisTitle.setAttribute("font-size", "14")
@@ -416,7 +619,6 @@ function renderManaCurve() {
 
   svgContainer.appendChild(svg)
 
-  // Create labels container (keeping the existing card count labels)
   const labelsContainer = document.createElement("div")
   labelsContainer.className = "curve-labels"
 
@@ -433,7 +635,7 @@ function renderManaCurve() {
   manaCurve.appendChild(svgContainer)
   manaCurve.appendChild(labelsContainer)
 
-  // Add statistics section
+  // statistics section
   const statsSection = document.createElement("div")
   statsSection.className = "mana-curve-stats"
 
@@ -497,8 +699,20 @@ function generateSampleHand() {
     })
     sampleHand.appendChild(handCardDiv)
   })
-  sampleHandSection.style.display = "block"
+
+  // changes button text to "Mulligan" and shows the sample hand
+  drawHandBtn.innerHTML = `
+    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="16,3 21,3 21,8"></polyline>
+      <line x1="4" y1="20" x2="21" y2="3"></line>
+      <polyline points="21,16 21,21 16,21"></polyline>
+      <line x1="15" y1="15" x2="21" y2="21"></line>
+      <line x1="4" y1="4" x2="9" y2="9"></line>
+    </svg>
+    Mulligan
+  `
+  document.getElementById("sampleHand").style.display = "grid"
 }
 
-// Initialize the application when DOM is loaded
+// initializes the application when DOM is loaded
 document.addEventListener("DOMContentLoaded", init)
