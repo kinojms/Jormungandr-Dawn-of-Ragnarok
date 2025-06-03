@@ -775,12 +775,12 @@ h6 {
 }
 
 .card-name {
-  font-family: "Beleren", "Cinzel", "Gloock", "Almendra SC", Georgia, serif;
+  font-family: "Cinzel", "Gloock", "Almendra SC", Georgia, serif;
   font-weight: normal;
   color: var(--accent-blue);
   margin-bottom: 0.5rem;
   font-size: 1rem;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
@@ -846,7 +846,7 @@ h6 {
   text-align: left;
   overflow-y: auto;
   padding: 1rem;
-  font-family: "Beleren", "Cinzel", "Gloock", "Almendra SC", Georgia, serif;
+  font-family: "Poppins", "Cinzel", "Gloock", "Almendra SC", Georgia, serif;
 }
 
 .card-back-details {
